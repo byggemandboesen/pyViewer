@@ -27,9 +27,44 @@ def loadImage():
         print(f"Exception occured: {e}")
         return
 
-    
+    updateImageInformation(img)
+
     ra, dec = img.getImageCoordinates()
     img_data = img.getImage()
 
-    plt.imshow(img_data, extent=[ra[0], ra[-1], dec[0], dec[-1]])
-    plt.show()
+    # plt.imshow(img_data, extent=[ra[0], ra[-1], dec[0], dec[-1]])
+    # plt.show()
+
+def updateImagePlot(img: Image):
+    '''
+    Updates image plot
+    '''
+
+
+def updateImageInformation(img: Image):
+    '''
+    Updates image information
+    '''
+    
+    ra, dec = img.getImageCenterCoordinates()
+    dpg.set_value("ra", ra)
+    dpg.set_value("dec", dec)
+
+    ra, dec = img.getImageSize()
+    dpg.set_value("imsize_ra", ra)
+    dpg.set_value("imsize_dec", dec)
+
+    ra, dec = img.getCellSize()
+    dpg.set_value("cell_ra", ra)
+    dpg.set_value("cell_dec", dec)
+
+    try:
+        bmaj, bmin = img.getBeamSize()
+        dpg.set_value("bmaj", bmaj)
+        dpg.set_value("bmin", bmin)
+    except Exception as e:
+        print("Beam size not available...")
+        dpg.set_value("bmaj", "N/A")
+        dpg.set_value("bmin", "N/A")
+
+

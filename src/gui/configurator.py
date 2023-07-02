@@ -7,16 +7,16 @@ def configuratorWindow():
     Main window of the configurator
     '''
 
-    with dpg.window(label="Configurator", width=300, height=800, pos=[10,10], no_close=True):
+    with dpg.window(label="Configurator", width=400, height=800, pos=[10,10], no_close=True):
         imageHeader()
 
-        dpg.add_spacer(height=5)
+        dpg.add_spacer(height=7.5)
         spectrumHeader()
 
-        dpg.add_spacer(height=5)
+        dpg.add_spacer(height=7.5)
         regionHeader()
 
-        dpg.add_spacer(height=5)
+        dpg.add_spacer(height=7.5)
         fittingHeader()
 
 
@@ -25,11 +25,57 @@ def imageHeader():
     '''
     Collapsing header section for handling images
     '''
+    LABELWIDTH = -200
+
     with dpg.collapsing_header(label="Images", default_open=True):
         with dpg.group(horizontal=True):
-            dpg.add_input_text(hint="Image path", tag="img_path", width=-50) # TODO - Add callback
+            dpg.add_input_text(hint="Image path", tag="img_path", width=-50)
             dpg.add_button(label="LOAD", callback=image_utils.loadImage)
 
+        dpg.add_spacer(height=5)
+        dpg.add_text("Center coordinate (degrees)")
+        with dpg.table(borders_innerH=True, borders_innerV=True, borders_outerH=True, borders_outerV=True):
+            dpg.add_table_column(label="Right ascension")
+            dpg.add_table_column(label="Declination")
+        
+            with dpg.table_row():
+                with dpg.table_cell():
+                    dpg.add_text("", tag="ra")
+                with dpg.table_cell():
+                    dpg.add_text("", tag="dec")
+        
+        dpg.add_text("Image size (arcsec)")
+        with dpg.table(borders_innerH=True, borders_innerV=True, borders_outerH=True, borders_outerV=True):
+            dpg.add_table_column(label="Right ascension")
+            dpg.add_table_column(label="Declination")
+
+            with dpg.table_row():
+                with dpg.table_cell():
+                    dpg.add_text("", tag="imsize_ra")
+                with dpg.table_cell():
+                    dpg.add_text("", tag="imsize_dec")
+        
+        dpg.add_text("Pixel size (arcsec)")
+        with dpg.table(borders_innerH=True, borders_innerV=True, borders_outerH=True, borders_outerV=True):
+            dpg.add_table_column(label="Right ascension")
+            dpg.add_table_column(label="Declination")
+
+            with dpg.table_row():
+                with dpg.table_cell():
+                    dpg.add_text("", tag="cell_ra")
+                with dpg.table_cell():
+                    dpg.add_text("", tag="cell_dec")
+        
+        dpg.add_text("Beam size (arcsec)")
+        with dpg.table(borders_innerH=True, borders_innerV=True, borders_outerH=True, borders_outerV=True):
+            dpg.add_table_column(label="Major axis")
+            dpg.add_table_column(label="Minor axis")
+        
+            with dpg.table_row():
+                with dpg.table_cell():
+                    dpg.add_text("", tag="bmaj")
+                with dpg.table_cell():
+                    dpg.add_text("", tag="bmin")
 
 def spectrumHeader():
     '''

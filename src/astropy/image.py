@@ -37,4 +37,32 @@ class Image:
 
         return ra, dec
     
+    def getImageCenterCoordinates(self) -> tuple:
+        '''
+        Returns the image center coordinates
+        '''
+        ra, dec = np.round(self.HDU.header["OBSRA"], 6), np.round(self.HDU.header["OBSDEC"], 6)
+        return ra, dec
+
+    def getBeamSize(self) -> tuple:
+        '''
+        Returns image beam size in arcsec
+        '''
+        bmaj, bmin = np.abs(np.round(self.HDU.header["BMAJ"]*60**2, 6)), np.abs(np.round(self.HDU.header["BMIN"]*60**2, 6))
+        return bmaj, bmin
+
+    def getCellSize(self) -> tuple:
+        '''
+        Returns cell/pixel size
+        '''
+        ra, dec = np.abs(np.round(self.HDU.header["CDELT1"]*60**2, 6)), np.abs(np.round(self.HDU.header["CDELT2"]*60**2, 6))
+        return ra, dec
+    
+    def getImageSize(self) -> tuple:
+        '''
+        Returns image size
+        '''
+        ra, dec = self.getCellSize()
+        img_shape = self.getImageShape()
+        return np.round(ra*img_shape[1], 6), np.round(dec*img_shape[2], 6)
     # ------------------------------------------------------------------------------------------------- #
