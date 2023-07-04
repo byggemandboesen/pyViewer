@@ -38,7 +38,9 @@ def loadImage():
 def updateImagePlot(img: Image):
     '''
     Updates image plot
+    TODO
     '''
+    print("TODO")
 
 
 def updateImageInformation(img: Image):

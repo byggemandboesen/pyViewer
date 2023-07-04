@@ -1,20 +1,29 @@
 import numpy as np
 import astropy.io.fits as fits
 
+from src.astropy.region import Region
+
 class Image:
     def __init__(self, path: str):
         with fits.open(path) as hdu:
             self.HDU = hdu[0]
             self.IMG = hdu[0].data[0, :, ...]
     
-    
     # ------------------------------------------------------------------------------------------------- #
+
     def getImage(self, channel: int = 0) -> np.ndarray:
         '''
         Returns the image at the specified channel number
         Channel number is only relevant for cubes
         '''
         return self.IMG[channel, ...]
+    
+    def getFrequencyAxis(self) -> np.ndarray:
+        '''
+        Returns frequency of image if type = mfs or entire frequency axis if type = cube
+        TODO
+        '''
+        print("TODO")
 
     def getImageShape(self) -> np.ndarray:
         '''
@@ -65,4 +74,12 @@ class Image:
         ra, dec = self.getCellSize()
         img_shape = self.getImageShape()
         return np.round(ra*img_shape[1], 6), np.round(dec*img_shape[2], 6)
+
     # ------------------------------------------------------------------------------------------------- #
+
+    def extractSpectrum(region: Region) -> np.ndarray:
+        '''
+        Extract spectrum from specified region
+        TODO
+        '''
+        print("TODO")
