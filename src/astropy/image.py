@@ -21,9 +21,18 @@ class Image:
     def getFrequencyAxis(self) -> np.ndarray:
         '''
         Returns frequency of image if type = mfs or entire frequency axis if type = cube
-        TODO
         '''
-        print("TODO")
+        START_FREQ, FREQ_DELTA = self.HDU.header["CRVAL3"], self.HDU.header["CDELT3"]
+        NAXIS = self.HDU.header["NAXIS3"]
+        STOP_FREQ = START_FREQ + NAXIS*FREQ_DELTA
+        
+        return np.linspace(start=START_FREQ, stop=STOP_FREQ, num = NAXIS, dtype=float)
+    
+    def getObjectName(self) -> str:
+        '''
+        Returns object name
+        '''
+        return str(self.HDU.header["OBJECT"])
 
     def getImageShape(self) -> np.ndarray:
         '''
@@ -69,7 +78,7 @@ class Image:
     
     def getImageSize(self) -> tuple:
         '''
-        Returns image size
+        Returns image size in arcseconds
         '''
         ra, dec = self.getCellSize()
         img_shape = self.getImageShape()

@@ -2,6 +2,7 @@ import os, sys
 import astropy.io.fits as fits
 import dearpygui.dearpygui as dpg
 import matplotlib.pyplot as plt
+import numpy as np
 
 from src.astropy.image import Image
 
@@ -10,7 +11,6 @@ def loadImage():
     Tries to load image from the path specified
     '''
     path = dpg.get_value("img_path")
-    print(path)
 
     if not os.path.exists(path):
         print("Path does not exist!!")
@@ -47,6 +47,20 @@ def updateImageInformation(img: Image):
     '''
     Updates image information
     '''
+    obj_name = img.getObjectName()
+    dpg.set_value("object_name", obj_name)
+
+    n_chan = img.getImageShape()[0]
+    dpg.set_value("number_of_chan", n_chan)
+    dpg.configure_item("channel_number", max_value = n_chan-1)
+
+    # If type = cube, show the frequency width between each channel
+    if n_chan > 1:
+        freq_ax = img.getFrequencyAxis()
+        chan_width = np.diff(np.sort(freq_ax[0:2]))
+        dpg.set_value("channel_freq_width", chan_width)
+    else:
+        dpg.set_value("channel_freq_width", 0.0)
     
     ra, dec = img.getImageCenterCoordinates()
     dpg.set_value("ra", ra)
