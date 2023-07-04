@@ -26,7 +26,10 @@ class Image:
         NAXIS = self.HDU.header["NAXIS3"]
         STOP_FREQ = START_FREQ + NAXIS*FREQ_DELTA
         
-        return np.linspace(start=START_FREQ, stop=STOP_FREQ, num = NAXIS, dtype=float)
+        freqs = np.linspace(start=START_FREQ, stop=STOP_FREQ, num = NAXIS, dtype=float)
+        if self.getImageShape()[0] == 1:
+            freqs = np.array([np.mean(freqs),])
+        return freqs
     
     def getObjectName(self) -> str:
         '''
@@ -83,6 +86,18 @@ class Image:
         ra, dec = self.getCellSize()
         img_shape = self.getImageShape()
         return np.round(ra*img_shape[1], 6), np.round(dec*img_shape[2], 6)
+
+    def getMinFlux(self) -> float:
+        '''
+        Returns minimum observed flux across all channels
+        '''
+        return np.min(self.IMG[:,...])
+    
+    def getMaxFlux(self) -> float:
+        '''
+        Returns maximum observed flux across all channels
+        '''
+        return np.max(self.IMG[:,...])
 
     # ------------------------------------------------------------------------------------------------- #
 

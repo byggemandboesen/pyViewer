@@ -31,13 +31,13 @@ def imageHeader():
 
         dpg.add_spacer(height=5)
         with dpg.group(horizontal=True):
-            dpg.add_input_text(hint="Image path", tag="img_path", width=-50)
-            dpg.add_button(label="LOAD", callback=image_utils.loadImage)
+            dpg.add_input_text(hint="Image path", tag="img_path", width=-75, callback=image_utils.loadImage)
+            dpg.add_button(label="BROWSE", width=-1, callback=image_utils.browseImage)
 
         dpg.add_spacer(height=5)
         dpg.add_input_text(label="Object name", default_value="", readonly=True, tag="object_name", width=LABELWIDTH)
         dpg.add_input_int(label="Number of channels", default_value=1, step=0, readonly=True, tag="number_of_chan", width=LABELWIDTH)
-        # dpg.add_input_float(label="Channel frequency (Hz)", default_value=0.0, step=0.0, readonly=True, tag="channel_freq", width=LABELWIDTH)
+        dpg.add_input_float(label="Channel frequency (Hz)", default_value=0.0, step=0.0, readonly=True, tag="channel_freq", width=LABELWIDTH)
         dpg.add_input_float(label="Channel width (Hz)", default_value=0.0, step=0.0, readonly=True, tag="channel_freq_width", width=LABELWIDTH)
 
         dpg.add_spacer(height=5)
