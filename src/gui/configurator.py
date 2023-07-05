@@ -66,6 +66,17 @@ def imageHeader():
                 with dpg.table_cell():
                     dpg.add_text("", tag="imsize_dec")
         
+        dpg.add_text("Image size (pixels)")
+        with dpg.table(borders_innerH=True, borders_innerV=True, borders_outerH=True, borders_outerV=True):
+            dpg.add_table_column(label="Right ascension")
+            dpg.add_table_column(label="Declination")
+
+            with dpg.table_row():
+                with dpg.table_cell():
+                    dpg.add_text("", tag="imsize_ra_pix")
+                with dpg.table_cell():
+                    dpg.add_text("", tag="imsize_dec_pix")
+
         dpg.add_text("Pixel size (arcsec)")
         with dpg.table(borders_innerH=True, borders_innerV=True, borders_outerH=True, borders_outerV=True):
             dpg.add_table_column(label="Right ascension")

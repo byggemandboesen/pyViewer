@@ -87,6 +87,10 @@ def updateImageInformation(img: Image):
     dpg.set_value("imsize_ra", ra)
     dpg.set_value("imsize_dec", dec)
 
+    dim = img.getImageShape()
+    dpg.set_value("imsize_ra_pix", dim[1])
+    dpg.set_value("imsize_dec_pix", dim[2])
+
     ra, dec = img.getCellSize()
     dpg.set_value("cell_ra", ra)
     dpg.set_value("cell_dec", dec)
