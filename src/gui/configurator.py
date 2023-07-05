@@ -1,6 +1,7 @@
 import dearpygui.dearpygui as dpg
+import os
 
-import src.utils.image_utils as image_utils
+import src.utils.image_utils as IMAGE_UTILS
 
 def configuratorWindow():
     '''
@@ -30,9 +31,11 @@ def imageHeader():
     with dpg.collapsing_header(label="Images", default_open=True):
 
         dpg.add_spacer(height=5)
+        with dpg.file_dialog(show=False, default_filename="", callback=IMAGE_UTILS.browseImage, cancel_callback=IMAGE_UTILS.browseImageCancelled, width=600, height=500, default_path=os.getcwd(), tag="image_file_dialog"):
+            dpg.add_file_extension(".fits", color=(0,255,0,255))
         with dpg.group(horizontal=True):
-            dpg.add_input_text(hint="Image path", tag="img_path", width=-75, callback=image_utils.loadImage)
-            dpg.add_button(label="BROWSE", width=-1, callback=image_utils.browseImage)
+            dpg.add_input_text(hint="Image path", tag="image_path", width=-75, callback=IMAGE_UTILS.loadImage)
+            dpg.add_button(label="BROWSE", width=-1, callback=lambda: dpg.show_item("image_file_dialog"))
 
         dpg.add_spacer(height=5)
         dpg.add_input_text(label="Object name", default_value="", readonly=True, tag="object_name", width=LABELWIDTH)

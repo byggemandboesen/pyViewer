@@ -6,19 +6,26 @@ import numpy as np
 
 from src.astropy.image import Image
 
-def browseImage():
+def browseImage(sender, path):
     '''
     Browse for images
-    TODO
     '''
-    print("Browsing...")
+    file_path = path["file_path_name"]
+    dpg.set_value("image_path", file_path)
+    loadImage("", "", False)
+
+def browseImageCancelled():
+    '''
+    Callback for cancelled image callback
+    '''
+    return
 
 
 def loadImage(sender, app_data, updateImageOnly: bool = False):
     '''
     Tries to load image from the path specified
     '''
-    path = dpg.get_value("img_path")
+    path = dpg.get_value("image_path")
 
     # Try to open image
     try:
