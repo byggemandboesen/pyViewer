@@ -3,6 +3,8 @@ import astropy.io.fits as fits
 
 from src.astropy.region import Region
 
+# https://casa.nrao.edu/docs/taskref/imhead-task.html
+
 class Image:
     def __init__(self, path: str):
         with fits.open(path) as hdu:
@@ -40,6 +42,7 @@ class Image:
     def getImageShape(self) -> np.ndarray:
         '''
         Returns image dimensions
+        Often in the order of [nchan, xpix, ypix]
         '''
         return np.shape(self.IMG)
 

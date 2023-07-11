@@ -6,7 +6,7 @@ import numpy as np
 
 from src.astropy.image import Image
 
-def browseImage(sender, path):
+def browseImage(sender, path) -> None:
     '''
     Browse for images
     '''
@@ -14,14 +14,14 @@ def browseImage(sender, path):
     dpg.set_value("image_path", file_path)
     loadImage("", "", False)
 
-def browseImageCancelled():
+def browseImageCancelled() -> None:
     '''
     Callback for cancelled image callback
     '''
     return
 
 
-def loadImage(sender, app_data, updateImageOnly: bool = False):
+def loadImage(sender, app_data, updateImageOnly: bool = False) -> None:
     '''
     Tries to load image from the path specified
     '''
@@ -39,7 +39,7 @@ def loadImage(sender, app_data, updateImageOnly: bool = False):
     updateImagePlot(img)
 
 
-def updateImagePlot(img: Image):
+def updateImagePlot(img: Image) -> None:
     '''
     Updates image plot
     '''
@@ -57,7 +57,7 @@ def updateImagePlot(img: Image):
     dpg.configure_item("cbar", min_scale=min, max_scale=max)
 
 
-def updateImageInformation(img: Image):
+def updateImageInformation(img: Image) -> None:
     '''
     Updates image information
     '''
