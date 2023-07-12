@@ -50,11 +50,21 @@ def updateImagePlot(img: Image) -> None:
     dpg.set_value("channel_freq", freqs[channel])
     img_data = img.getImage(channel=channel)
     
+    # Update plot
     min, max = img.getMinFlux(), img.getMaxFlux()
     dpg.configure_item("heatmap", x=img_data.flatten().tolist(), rows=dim[1], cols=dim[2], scale_min=min, scale_max=max)
     dpg.set_axis_limits_auto("ra_axis")
     dpg.set_axis_limits_auto("dec_axis")
     dpg.configure_item("cbar", min_scale=min, max_scale=max)
+
+    # Update axis
+    n_skip = 12
+    ra, dec = img.getImageCoordinates(dtype=str, round=3)
+    current_ra_labels, current_dec_labels = np.linspace(0, 1, dim[1]+1), np.linspace(0, 1, dim[2]+1)
+    ra_labels = tuple(zip(*(ra[::n_skip], current_ra_labels[::n_skip])))
+    dec_labels = tuple(zip(*(dec[::n_skip], current_dec_labels[::n_skip])))
+    dpg.set_axis_ticks("ra_axis", ra_labels)
+    dpg.set_axis_ticks("dec_axis", dec_labels)
 
 
 def updateImageInformation(img: Image) -> None:

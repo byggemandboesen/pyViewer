@@ -46,7 +46,7 @@ class Image:
         '''
         return np.shape(self.IMG)
 
-    def getImageCoordinates(self) -> tuple:
+    def getImageCoordinates(self, dtype: np.dtype = float, round: int = 8) -> tuple:
         '''
         Returns the RA/Dec coordinates of image
         Return type is a tuple of, (np.ndarray, np.ndarray)
@@ -56,10 +56,10 @@ class Image:
         ref_ra_coord, ref_dec_coord = self.HDU.header["crval1"], self.HDU.header["crval2"]
         ref_ra_pix, ref_dec_pix = self.HDU.header["crpix1"], self.HDU.header["crpix2"]
         ra_delt, dec_delt = self.HDU.header["cdelt1"], self.HDU.header["cdelt2"]
-        ra = np.linspace(ref_ra_coord-ref_ra_pix*ra_delt, ref_ra_coord-ref_ra_pix*ra_delt+shape[1]*ra_delt, shape[1]+1)
-        dec = np.linspace(ref_dec_coord-ref_dec_pix*dec_delt, ref_dec_coord-ref_dec_pix*dec_delt+shape[2]*dec_delt, shape[2]+1)
+        ra = np.round(np.linspace(ref_ra_coord-ref_ra_pix*ra_delt, ref_ra_coord-ref_ra_pix*ra_delt+shape[1]*ra_delt, shape[1]+1), round)
+        dec = np.round(np.linspace(ref_dec_coord-ref_dec_pix*dec_delt, ref_dec_coord-ref_dec_pix*dec_delt+shape[2]*dec_delt, shape[2]+1), round)
 
-        return ra, dec
+        return np.array(ra, dtype=dtype), np.array(dec, dtype=dtype)
     
     def getImageCenterCoordinates(self) -> tuple:
         '''
@@ -110,3 +110,36 @@ class Image:
         TODO
         '''
         print("TODO")
+
+
+class ImageChannel:
+    def __init__(self, img: Image, channel: int = 0):
+        '''
+        Initalize channel from image
+        '''
+        self.CHANNEL = channel
+        self.IMAGE_CHANNEL = img.getImage(channel=channel)
+
+
+    # ------------------------------------------------------------------------------------------------- #
+
+    def getChannelImage(self) -> np.ndarray:
+        '''
+        Returns channel image
+        '''
+        return self.IMAGE_CHANNEL
+    
+    # ------------------------------------------------------------------------------------------------- #
+    
+    # def getMean(self) -> float:
+    #     '''
+    #     Return mean value of image at corresponding channel inside of region
+    #     '''
+    #     return np.mean(self.IMG_REGION)
+
+
+    # def getRMS(self) -> float:
+    #     '''
+    #     Returns the RMS inside of the current region of the specified image and channel
+    #     '''
+    #     return np.std(self.IMG_REGION - self.getMean(self.IMG_REGION))

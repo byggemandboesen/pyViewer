@@ -1,13 +1,13 @@
 import numpy as np
 
-from src.astropy.image_channel import ImageChannel
+# from src.astropy.image import ImageChannel
 
 class Region:
-    def __init__(self, img_size = np.ndarray):
+    def __init__(self, img):
         '''
         Initialize empty region
         '''
-        self.IMG_SIZE = tuple(img_size)
+        self.IMG_SIZE = np.size(img.getChannelImage())
         self.REGION = np.zeros(self.IMG_SIZE)
     
     # ------------------------------------------------------------------------------------------------- #
