@@ -7,7 +7,7 @@ def imageWindow():
     '''
     Window for images
     '''
-    with dpg.window(label="Image viewer", width=950, height=800, pos=[420, 10], no_close=True, no_scrollbar=True):
+    with dpg.window(label="Image viewer", width=650, height=600, pos=[470, 10], no_close=True, no_scrollbar=True):
         dpg.add_slider_int(label="Channel", min_value=0, max_value=0, default_value=0, width=-75, tag="channel_number", callback=IMAGE_CALLBACKS.loadImage, user_data=True)
 
         with dpg.group(horizontal=True):

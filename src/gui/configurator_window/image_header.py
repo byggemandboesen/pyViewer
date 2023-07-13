@@ -2,12 +2,12 @@ import dearpygui.dearpygui as dpg
 import os
 
 import src.gui.callbacks.image_callbacks as IMAGE_CALLBACKS
+import src.gui.ui_consts as UI_CONSTS
 
 def imageHeader():
     '''
     Collapsing header section for handling images
     '''
-    LABELWIDTH = -175
 
     with dpg.collapsing_header(label="Images", default_open=True):
 
@@ -19,10 +19,10 @@ def imageHeader():
             dpg.add_button(label="BROWSE", width=-1, callback=lambda: dpg.show_item("image_file_dialog"))
 
         dpg.add_spacer(height=5)
-        dpg.add_input_text(label="Object name", default_value="", readonly=True, tag="object_name", width=LABELWIDTH)
-        dpg.add_input_int(label="Number of channels", default_value=1, step=0, readonly=True, tag="number_of_chan", width=LABELWIDTH)
-        dpg.add_input_float(label="Channel frequency (Hz)", default_value=0.0, step=0.0, readonly=True, tag="channel_freq", width=LABELWIDTH)
-        dpg.add_input_float(label="Channel width (Hz)", default_value=0.0, step=0.0, readonly=True, tag="channel_freq_width", width=LABELWIDTH)
+        dpg.add_input_text(label="Object name", default_value="", readonly=True, tag="object_name", width=UI_CONSTS.W_NUM_INP_ONE_COL)
+        dpg.add_input_int(label="Number of channels", default_value=1, step=0, readonly=True, tag="number_of_chan", width=UI_CONSTS.W_NUM_INP_ONE_COL)
+        dpg.add_input_float(label="Channel frequency (Hz)", default_value=0.0, step=0.0, readonly=True, tag="channel_freq", width=UI_CONSTS.W_NUM_INP_ONE_COL)
+        dpg.add_input_float(label="Channel width (Hz)", default_value=0.0, step=0.0, readonly=True, tag="channel_freq_width", width=UI_CONSTS.W_NUM_INP_ONE_COL)
 
         dpg.add_spacer(height=5)
         dpg.add_text("Center coordinate (degrees)")

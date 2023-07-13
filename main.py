@@ -3,15 +3,17 @@ import os, sys
 sys.dont_write_bytecode = True
 
 import src.gui.configurator as Configurator
-import src.gui.imageviewer as Imageviewer
+import src.gui.imageviewer as ImageViewer
+import src.gui.spectrumviewer as SpectrumViewer
 
 # Run user intereface
 def run_ui():
     dpg.create_context()
-    dpg.create_viewport(title='pyViewer - Victor Boesen', width=1400, height=875)
+    dpg.create_viewport(title='pyViewer - Victor Boesen', width=1150, height=960)
     
     Configurator.configuratorWindow()
-    Imageviewer.imageWindow()
+    ImageViewer.imageWindow()
+    SpectrumViewer.spectrumWindow()
 
     dpg.setup_dearpygui()
     dpg.show_viewport()

@@ -11,7 +11,7 @@ def configuratorWindow():
     Main window of the configurator
     '''
 
-    with dpg.window(label="Configurator", width=400, height=800, pos=[10,10], no_close=True):
+    with dpg.window(label="Configurator", width=450, height=900, pos=[10,10], no_close=True):
         imageHeader()
 
         dpg.add_spacer(height=7.5)
