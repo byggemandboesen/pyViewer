@@ -7,5 +7,5 @@ def fittingHeader():
     '''
     Collapsing header section for fitting models to spectrum
     '''
-    with dpg.collapsing_header(label="Model fitting", default_open=True):
+    with dpg.collapsing_header(label="Model fitting", default_open=False):
         dpg.add_text("TODO")
