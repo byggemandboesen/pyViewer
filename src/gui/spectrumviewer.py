@@ -5,7 +5,7 @@ def spectrumWindow():
     '''
     Window for images
     '''
-    with dpg.window(label="Spectrum viewer", width=650, height=290, pos=[470, 620], no_close=True, no_scrollbar=True):
+    with dpg.window(label="Spectrum viewer", width=700, height=290, pos=[470, 620], no_close=True, no_scrollbar=True):
         dpg.add_slider_int(label="Channel", min_value=0, max_value=0, default_value=0, width=-75, tag="spectrum_channel_number", user_data=True) # TODO - Add callback
 
         with dpg.plot(width=-1,height=-1, tag = "spectrum_plot", anti_aliased=True):

@@ -9,7 +9,7 @@ import src.gui.spectrumviewer as SpectrumViewer
 # Run user intereface
 def run_ui():
     dpg.create_context()
-    dpg.create_viewport(title='pyViewer - Victor Boesen', width=1150, height=960)
+    dpg.create_viewport(title='pyViewer - Victor Boesen', width=1200, height=960)
     
     Configurator.configuratorWindow()
     ImageViewer.imageWindow()

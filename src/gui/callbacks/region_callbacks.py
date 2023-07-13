@@ -10,7 +10,6 @@ from src.astropy.region import Region
 # etc...
 
 
-
 def updateRegionPlot():
     '''
     Updates the region plot
@@ -19,6 +18,8 @@ def updateRegionPlot():
     region_active = dpg.get_value("toggle_region")
 
     if not region_active:
+        if dpg.does_item_exist("active_region_plot"):
+            dpg.hide_item("active_region_plot")
         return
     
     # Current image shape
@@ -42,9 +43,16 @@ def updateRegionPlot():
 
     # TODO - Add region to image viewer
     # TODO - Display region statistics
+    if dpg.does_item_exist("active_region_plot"):
+        dpg.configure_item("active_region_plot", x=region, rows=shape[0], cols=shape[1], show=True)
+    else:
+        dpg.add_heat_series(x=region, rows=shape[0], cols=shape[1], label="Active region", parent="dec_axis", format="", tag="active_region_plot")
+
+    # dpg.add_custom_series()
+    # dpg.add_area_series()
 
 
-def ellipseRegion(shape: tuple) -> Region:
+def ellipseRegion(shape: tuple) -> np.ndarray:
     '''
     Returns an elliptic region instance
     '''
@@ -57,7 +65,7 @@ def ellipseRegion(shape: tuple) -> Region:
     return ellipse
 
 
-def boxRegion(shape: tuple) -> Region:
+def boxRegion(shape: tuple) -> np.ndarray:
     '''
     Returns a box region instance
     '''
@@ -70,7 +78,7 @@ def boxRegion(shape: tuple) -> Region:
     return box
 
 
-def thresholdRegion(shape: tuple) -> Region:
+def thresholdRegion(shape: tuple) -> np.ndarray:
     '''
     Returns a threshold region instance
     '''
