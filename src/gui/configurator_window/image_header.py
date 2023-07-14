@@ -1,8 +1,10 @@
-import dearpygui.dearpygui as dpg
 import os
+
+import dearpygui.dearpygui as dpg
 
 import src.gui.callbacks.image_callbacks as IMAGE_CALLBACKS
 import src.gui.ui_consts as UI_CONSTS
+
 
 def imageHeader():
     '''

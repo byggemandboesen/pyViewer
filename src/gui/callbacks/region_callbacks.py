@@ -1,7 +1,6 @@
 import dearpygui.dearpygui as dpg
-import numpy as np
-
 import matplotlib.pyplot as plt
+import numpy as np
 
 from src.astropy.region import Region
 
@@ -23,10 +22,12 @@ def updateRegionPlot():
         return
     
     # Current image shape
-    shape = (int(dpg.get_value("imsize_ra_pix")), int(dpg.get_value("imsize_dec_pix")))
+    shape = (dpg.get_value("imsize_ra_pix"), dpg.get_value("imsize_dec_pix"))
     if shape == ("", ""):
-        print("No image detected! Not able to generate region")
+        print("No, or invalid, image detected! Not able to generate region...")
         return
+    
+    shape = tuple(int(val) for val in shape)
 
     match region_type:
         case "Ellipse":
@@ -41,7 +42,7 @@ def updateRegionPlot():
     # plt.imshow(region)
     # plt.show()
 
-    # TODO - Add region to image viewer
+    # TODO - Fix displayed region
     # TODO - Display region statistics
     if dpg.does_item_exist("active_region_plot"):
         dpg.configure_item("active_region_plot", x=region, rows=shape[0], cols=shape[1], show=True)

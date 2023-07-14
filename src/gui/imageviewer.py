@@ -3,6 +3,7 @@ import numpy as np
 
 import src.gui.callbacks.image_callbacks as IMAGE_CALLBACKS
 
+
 def imageWindow():
     '''
     Window for images

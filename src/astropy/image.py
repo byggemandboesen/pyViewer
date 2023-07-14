@@ -1,6 +1,6 @@
 import numpy as np
-import astropy.io.fits as fits
 
+import astropy.io.fits as fits
 from src.astropy.region import Region
 
 # https://casa.nrao.edu/docs/taskref/imhead-task.html

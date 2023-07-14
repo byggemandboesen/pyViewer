@@ -1,8 +1,10 @@
-import dearpygui.dearpygui as dpg
 import os
+
+import dearpygui.dearpygui as dpg
 
 import src.gui.callbacks.region_callbacks as REGION_CALLBACKS
 import src.gui.ui_consts as UI_CONSTS
+
 
 def regionHeader():
     '''

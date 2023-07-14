@@ -1,10 +1,13 @@
-import os, sys
-import astropy.io.fits as fits
+import os
+import sys
+
 import dearpygui.dearpygui as dpg
 import matplotlib.pyplot as plt
 import numpy as np
 
+import astropy.io.fits as fits
 from src.astropy.image import Image
+
 
 def browseImage(sender, path) -> None:
     '''

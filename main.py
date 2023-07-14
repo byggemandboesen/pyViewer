@@ -1,10 +1,14 @@
+import os
+import sys
+
 import dearpygui.dearpygui as dpg
-import os, sys
+
 sys.dont_write_bytecode = True
 
 import src.gui.configurator as Configurator
 import src.gui.imageviewer as ImageViewer
 import src.gui.spectrumviewer as SpectrumViewer
+
 
 # Run user intereface
 def run_ui():

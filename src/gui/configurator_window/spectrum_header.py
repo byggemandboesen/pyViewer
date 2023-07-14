@@ -1,7 +1,9 @@
-import dearpygui.dearpygui as dpg
 import os
 
+import dearpygui.dearpygui as dpg
+
 import src.gui.callbacks.spectrum_callbacks as SPECTRUM_CALLBACKS
+
 
 def spectrumHeader():
     '''

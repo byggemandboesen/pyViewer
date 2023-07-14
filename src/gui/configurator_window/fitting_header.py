@@ -1,5 +1,6 @@
-import dearpygui.dearpygui as dpg
 import os
+
+import dearpygui.dearpygui as dpg
 
 # import src.gui.callbacks.image_callbacks as IMAGE_CALLBACKS
 

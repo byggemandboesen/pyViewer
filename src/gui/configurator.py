@@ -1,10 +1,12 @@
-import dearpygui.dearpygui as dpg
 import os
 
-from src.gui.configurator_window.image_header import imageHeader
-from src.gui.configurator_window.spectrum_header import spectrumHeader
-from src.gui.configurator_window.region_header import regionHeader
+import dearpygui.dearpygui as dpg
+
 from src.gui.configurator_window.fitting_header import fittingHeader
+from src.gui.configurator_window.image_header import imageHeader
+from src.gui.configurator_window.region_header import regionHeader
+from src.gui.configurator_window.spectrum_header import spectrumHeader
+
 
 def configuratorWindow():
     '''
