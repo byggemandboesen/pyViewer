@@ -24,7 +24,7 @@ def browseImageCancelled() -> None:
     return
 
 
-def loadImage(sender, app_data, updateImageOnly: bool = False) -> None:
+def loadImage(sender = "", app_data = "", updateImageOnly: bool = False) -> Image:
     '''
     Tries to load image from the path specified
     '''
@@ -34,12 +34,14 @@ def loadImage(sender, app_data, updateImageOnly: bool = False) -> None:
     try:
         img = Image(path)
     except Exception as e:
-        # print(f"Exception occured: {e}")
+        print(f"Exception occured: {e}")
         return
     
     if not updateImageOnly:
         updateImageInformation(img)
     updateImagePlot(img)
+
+    return img
 
 
 def updateImagePlot(img: Image) -> None:

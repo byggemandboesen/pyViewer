@@ -12,19 +12,14 @@ class Region:
     
     # ------------------------------------------------------------------------------------------------- #
 
-    def resetRegion(self):
+    def setEmpty(self):
         '''
         Reset region back to empty region
         '''
-        self.REGION = np.zeros(self.SHAPE)
+        region = np.zeros(self.SHAPE)
+        return region
 
-    # def updateImageRegion(self) -> None:
-    #     '''
-    #     Updates the region extracted image from current region
-    #     '''
-    #     self.IMG_REGION = self.IMG[self.REGION==1]
-
-    def setBox(self, corner: np.ndarray, width: int, height: int) -> None:
+    def setBox(self, corner: np.ndarray, width: int, height: int) -> np.ndarray:
         '''
         Set region to a box from lower left corner coordinates and widht/heigh of box
         '''
@@ -37,7 +32,7 @@ class Region:
 
         return region
     
-    def setEllipse(self, center: np.ndarray, width: int, height: int, tilt: float) -> None:
+    def setEllipse(self, center: np.ndarray, width: int, height: int, tilt: float) -> np.ndarray:
         '''
         Set region to an ellipse from center coordinates and major/minor axis.
         If major_ax=minor_ax, a circular region with diameter of the major axis will be applied.
@@ -53,4 +48,18 @@ class Region:
         
         # TODO - Add tilt angle
         return region
+    
+
+    def setThreshold(self, reference_img: np.ndarray, limit: float) -> np.ndarray:
+        '''
+        Set region from RMS threshold limit
+        TODO - Measure RMS from outside target area
+        '''
+        mean_flux = np.mean(reference_img)
+        threshold = limit*np.std(reference_img-mean_flux)
+        region = np.where(reference_img>=threshold, 1, 0)
+
+        return region
+
+
     # ------------------------------------------------------------------------------------------------- #

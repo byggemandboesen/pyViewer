@@ -50,4 +50,20 @@ def regionHeader():
         
         dpg.add_spacer(height=2.5)
         with dpg.tree_node(label="Threshold"):
-            dpg.add_text("Configure threshold region")
+            dpg.add_text("Noise threshold limit")
+            dpg.add_input_float(label="RMS", min_value=0, max_value=10, min_clamped=True, max_clamped=True, default_value=3, width=UI_CONSTS.W_NUM_INP_ONE_COL, callback=REGION_CALLBACKS.updateRegionPlot, tag="rms_threshold")
+
+            dpg.add_spacer(height=5)
+            dpg.add_text("RMS threshold from reference image:")
+            with dpg.file_dialog(show=False, default_filename="", callback=REGION_CALLBACKS.browseReferenceImage, cancel_callback=REGION_CALLBACKS.browseReferenceImageCancelled, width=600, height=500, default_path=os.getcwd(), tag="reference_image_file_dialog"):
+                dpg.add_file_extension(".fits", color=(0,255,0,255))
+            with dpg.group(horizontal=True):
+                dpg.add_input_text(hint="Reference image path", width=-75, callback=REGION_CALLBACKS.updateRegionPlot, tag="reference_image_path")
+                dpg.add_button(label="BROWSE", width=-1, callback=lambda: dpg.show_item("reference_image_file_dialog"))
+            
+            # dpg.add_spacer(height=5)
+            # with dpg.group(horizontal=True):
+            #     dpg.add_text("Reference level: ")
+            #     dpg.add_text("", tag="rms_level")
+            #     dpg.add_text(" Jy")
+

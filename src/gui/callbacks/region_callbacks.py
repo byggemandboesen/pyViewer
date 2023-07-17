@@ -1,12 +1,26 @@
+import os
 import dearpygui.dearpygui as dpg
 import matplotlib.pyplot as plt
 import numpy as np
 
+import src.gui.callbacks.image_callbacks as IMAGE_CALLBACKS
+from src.astropy.image import Image
 from src.astropy.region import Region
 
-# Add region
-# Update region
-# etc...
+
+def browseReferenceImage(sender, path) -> None:
+    '''
+    Browse for images
+    '''
+    file_path = path["file_path_name"]
+    dpg.set_value("reference_image_path", file_path)
+
+
+def browseReferenceImageCancelled() -> None:
+    '''
+    Callback for cancelled image callback
+    '''
+    return
 
 
 def updateRegionPlot():
@@ -44,13 +58,11 @@ def updateRegionPlot():
 
     # TODO - Fix displayed region
     # TODO - Display region statistics
+    # TODO - Add invert region functionality
     if dpg.does_item_exist("active_region_plot"):
         dpg.configure_item("active_region_plot", x=region, rows=shape[0], cols=shape[1], show=True)
     else:
         dpg.add_heat_series(x=region, rows=shape[0], cols=shape[1], label="Active region", parent="dec_axis", format="", tag="active_region_plot")
-
-    # dpg.add_custom_series()
-    # dpg.add_area_series()
 
 
 def ellipseRegion(shape: tuple) -> np.ndarray:
@@ -83,4 +95,23 @@ def thresholdRegion(shape: tuple) -> np.ndarray:
     '''
     Returns a threshold region instance
     '''
-    return
+
+    path = dpg.get_value("reference_image_path")
+
+    if not os.path.isfile(path):
+        print("Invalid reference image or no reference image selected!")
+        return Region(shape).setEmpty()
+
+    try:
+        img = Image(path)
+    except Exception as e:
+        print(f"Exception occured: {e}")
+        return
+    
+    # channel = dpg.get_value("channel_number")
+    img_data = img.getImage()
+    region = Region(shape)
+
+    threshold = region.setThreshold(reference_img=img_data, limit=dpg.get_value("rms_threshold"))
+
+    return threshold
