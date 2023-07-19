@@ -30,6 +30,9 @@ def loadImage(sender = "", app_data = "", updateImageOnly: bool = False) -> Imag
     '''
     path = dpg.get_value("image_path")
 
+    if not os.path.isfile(path):
+        return
+
     # Try to open image
     try:
         img = Image(path)
